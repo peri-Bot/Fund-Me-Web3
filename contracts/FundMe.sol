@@ -1,7 +1,8 @@
-//SPDX-License-Identifier: Unlicense
+//SPDX-License-Identifier: MIT
 
 pragma solidity ^0.8.0;
 
+import "@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol";
 import "contracts/PriceConverter.sol";
 
 error NotOwner();
@@ -16,12 +17,18 @@ contract FundMe {
     address[] public funders;
     mapping(address => uint256) public addrToAmtFund;
 
-    constructor() {
+    AggregatorV3Interface public priceFeed;
+
+    constructor(address priceFeedAddress) {
         i_owner = msg.sender;
+        priceFeed = AggregatorV3Interface(priceFeedAddress);
     }
 
     function fund() public payable {
-        require(msg.value.getConvertedRate() >= MINUSD, "Didn't send enough!");
+        require(
+            msg.value.getConvertedRate(priceFeed) >= MINUSD,
+            "Didn't send enough!"
+        );
         funders.push(msg.sender);
         addrToAmtFund[msg.sender] = msg.value;
     }

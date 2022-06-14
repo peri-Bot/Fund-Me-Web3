@@ -17,22 +17,22 @@ contract FundMe {
     uint256 public constant MINUSD = 50 * 1e18;
     uint256 public valInUSD;
 
-    address private immutable i_owner;
+    address private immutable i_Owner;
     address[] private s_funders;
     mapping(address => uint256) private s_addrToAmtFund;
 
     AggregatorV3Interface private s_priceFeed;
 
     modifier onlyOwner() {
-        //require(msg.sender == i_owner, "Your not owner");
-        if (msg.sender != i_owner) {
+        //require(msg.sender == i_Owner, "Your not owner");
+        if (msg.sender != i_Owner) {
             revert FundMe__NotOwner();
         }
         _;
     }
 
     constructor(address priceFeedAddress) {
-        i_owner = msg.sender;
+        i_Owner = msg.sender;
         s_priceFeed = AggregatorV3Interface(priceFeedAddress);
     }
 
@@ -77,7 +77,7 @@ contract FundMe {
     }
 
     function getOwner() public view returns (address) {
-        return i_owner;
+        return i_Owner;
     }
 
     function getFunders(uint256 index) public view returns (address) {

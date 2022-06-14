@@ -1,6 +1,10 @@
 const { assert, expect } = require("chai")
 const { deployments, ethers, getNamedAccounts } = require("hardhat")
+const { developmnetChain } = require("../../helper-hardhat-config")
 
+// !developmnetChain.includes(network.name)
+//     ? describe.skip
+//     :
 describe("FundMe", async function () {
     let fundMe, deployer, MockV3Aggregator, user
     const sendValue = ethers.utils.parseEther("1000")

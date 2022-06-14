@@ -1,5 +1,7 @@
 {
-  "name": "hardhat-project",
+  "name": "hardhat-fund-me",
+  "author": "Kidus Abebe",
+  "version": "1.0.0",
   "dependencies": {
     "hardhat": "^2.9.9"
   },
@@ -25,5 +27,12 @@
     "prettier-plugin-solidity": "^1.0.0-beta.13",
     "solhint": "^3.3.6",
     "solidity-coverage": "^0.7.16"
+  },
+  "scripts":{
+    "fund": "yarn hardhat run scripts/fund.js",
+    "test": "yarn hardhat test",
+    "lint": "yarn solhint 'contracts/*.sol'",
+    "lint:fix": "yarn solhint 'contracts/*.sol' --fix",
+    "coverage": "yarn hardhat coverage"
   }
 }

@@ -14,7 +14,7 @@ error FundMe__NotOwner();
 contract FundMe {
     using PriceConverter for uint256;
 
-    uint256 public constant MINUSD = 50 * 1e18;
+    uint256 public constant MINUSD = 50 * 10**18;
     uint256 public valInUSD;
 
     address private immutable i_Owner;
